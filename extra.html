@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            padding: 15%;
+        }
+    </style>
+</head>
+<body>
+    <label>Enter your Email</label>
+    <br><br>
+    <input type="email" id="mail" name="mail" placeholder="Enter your Email"></input>
+    <br><br>
+    <button type="submit" onclick="Submit()">Submit</button>
+    <div id="show"></div>
+
+    <script>
+        const Submit = () => {
+            let result = "";
+            let mail = document.getElementById("mail").value;
+            var maskid = "";
+            var prefix = mail.substring(0, mail.lastIndexOf("@"));
+            console.log("hello", mail);
+            var postfix = mail.substring(mail.lastIndexOf("@"));
+            console.log("postFix", postfix);
+            prefix = prefix.replace(/gmail/g, "g**l");
+            console.log(prefix)
+             // Masking "gmail" part
+            maskid = prefix + postfix;
+            console.log(maskid);
+            result = maskid;
+            console.log("mas", result);
+            document.getElementById("show").innerHTML = result;
+        };
+    </script>
+</body>
+</html>

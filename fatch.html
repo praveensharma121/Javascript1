@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API Data Display</title>
+</head>
+<body>
+    <table id="res">
+        <tr>
+            <th>id</th>
+            <th>title</th>
+            <th>body</th>
+        </tr>
+    </table>
+    <script>
+        const apiUrl = "https://jsonplaceholder.typicode.com/posts";
+        // Function to make a GET request
+        const getData = async () => {
+            try {
+                const response = await fetch(apiUrl, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json", // Add headers if needed
+                        // Other headers can be added here
+                    },
+                });
+                if (!response.ok) {
+                    throw new Error(
+                        `GET request failed with status ${response.status}`
+                    );
+                }
+                const data = await response.json();
+                console.log("GET Response:", data);
+
+                // Create table rows and append to the table
+                let result = "";
+                data.forEach((item) => {
+                    result += `
+              <tr>
+                <td>${item.id}</td>
+                <td>${item.title}</td>
+                <td>${item.body}</td>
+              </tr>`;
+                });
+                // Display the table rows in the table
+                document.getElementById("res").innerHTML += result;
+            } catch (error) {
+                console.error("GET Error:", error);
+                displayError(error.message);
+            }
+        };
+        // Other functions remain unchanged...
+
+        // Execute the functions
+        getData();
+        //   postData();
+        //   putData();
+        //   deleteData();
+        //post mathod
+        const postData = async () => {
+            const data = {
+                title: "New Post",
+                body: "This is a new post.",
+                userId: 1,
+            };
+            try {
+                const response = await fetch(apiUrl, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json", // Add headers if needed
+                        // Other headers can be added here
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                if (!response.ok) {
+                    throw new Error(
+                        `POST request failed with status ${response.status}`
+                    );
+                }
+                const responseData = await response.json();
+                console.log("POST Response:", responseData);
+                displayData(responseData);
+            } catch (error) {
+                console.error("POST Error:", error);
+                displayError(error.message);
+            }
+        };
+        postData();
+        const apiUrl2 = "https://jsonplaceholder.typicode.com/posts/10";
+
+        const putData = async () => {
+            const data = {
+                title: "New Post",
+                body: "This is a new post.",
+                userId: 1,
+            };
+
+            try {
+                const response = await fetch(apiUrl2, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json", // Add headers if needed
+                        // Other headers can be added here
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                if (!response.ok) {
+                    throw new Error(
+                        `POST request failed with status ${response.status}`
+                    );
+                }
+                const responseData = await response.json();
+                console.log("Put Response:", responseData);
+                displayData(responseData);
+            } catch (error) {
+                console.error("put Error:", error);
+                displayError(error.message);
+            }
+        };
+        //   postData();
+        putData();
+        //delete
+        const apiUrl3 = "https://jsonplaceholder.typicode.com/posts/12";
+
+        const DeleteData = async () => {
+            try {
+                const response = await fetch(apiUrl3, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json", // Add headers if needed
+                        // Other headers can be added here
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error(
+                        `POST request failed with status ${response.status}`
+                    );
+                }
+
+                const responseData = await response.json();
+                console.log("del Response:", responseData);
+                displayData(responseData);
+            } catch (error) {
+                console.error("del Error:", error);
+                displayError(error.message);
+            }
+        };
+        //   postData();
+        // putData();
+        DeleteData();
+        //put Data
+    </script>
+</body>
+
+</html>

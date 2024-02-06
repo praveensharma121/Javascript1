@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* Centering container */
+      .container {
+        border: 1px solid black;
+        height: 350px;
+        border: 1 px solid black;
+        width: 30%;
+        background-color: #cde3e3;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+          0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      }
+
+      /* Optional: Style for the input and button */
+      input {
+        margin: 5px;
+        /* padding: 5px 10px; */
+        /* border-radius: 10px; */
+        border-style: none;
+        background-color: transparent;
+        border-bottom: 2px solid black;
+        outline: none;
+      }
+      center.center {
+        padding: 12%;
+      }
+      button {
+        border-radius: 10px;
+        width: 20%;
+        background-color: #bbc6f9;
+      }
+    </style>
+  </head>
+
+  <body>
+    <center class="center">
+      <div class="container">
+        <div>
+          <h3>Gmail</h3>
+          <input
+            type="email"
+            id="email"
+            value=""
+            name="email"
+            placeholder="enter email"
+          />
+          <br /><br />
+          <button onclick="Submit()">submit</button>
+        </div>
+        <br /><br />
+        result
+        <div id="Show"></div>
+      </div>
+    </center>
+
+    <script>
+      var email = document.getElementById("email");
+
+      // document.getElementById("email").value = "";
+
+      const Submit = () => {
+        let Mask_Result = "";
+        let mail_val = email.value;
+        var FirstPart = mail_val.split("@");
+        let prefix = FirstPart[0];
+        // let postfix = "@gmail.com";
+        let masking = "";
+        let firstChar = prefix.substring(0, 1);
+        let lastChar = prefix.substring(prefix.length - 1);
+
+        console.log("first", firstChar);
+        console.log(lastChar);
+
+        for (let index = 2; index < prefix.length; index++) {
+          firstChar += "*";
+          console.log("element", firstChar);
+        }
+
+        masking = firstChar + lastChar;
+        console.log(masking);
+
+        let preafter = FirstPart[1];
+        var SecondPart = preafter.split(".");
+        console.log("divide2", SecondPart);
+        preafter = SecondPart[0];
+        let postafter = ".com";
+        console.log("preafter", preafter);
+
+        let masking2 = "";
+        let firstChar2 = preafter.substring(0, 1);
+        let lastChar2 = preafter.substring(preafter.length - 1);
+
+        console.log("first", firstChar2);
+        console.log("First-Last", lastChar2);
+
+        for (let index = 2; index < preafter.length; index++) {
+          firstChar2 += "*";
+          console.log("element", firstChar2);
+        }
+        masking2 = firstChar2 + lastChar2 + postafter;
+        console.log(masking2);
+
+        var result = masking + masking2;
+
+        Mask_Result = result;
+
+        console.log("result", result);
+
+        document.getElementById("Show").innerHTML = Mask_Result;
+      };
+    </script>
+  </body>
+</html>

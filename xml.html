@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      th,
+      td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <tbody id="tbody">
+        <tr>
+          <th>id</th>
+          <th>groupId</th>
+          <th>title</th>
+        </tr>
+      </tbody>
+    </table>
+
+    <script>
+        //get in xml api
+        const xhr = new XMLHttpRequest();
+        const url = "https://jsonplaceholder.typicode.com/posts";
+
+        var url2 = "https://jsonplaceholder.typicode.com/albums";
+
+        xhr.open("GET", url);
+        xhr.send();
+
+        xhr.onload = (e) => {
+          let res = xhr.response;
+
+          var respons = JSON.parse(res);
+
+          console.log(res);
+          let our_Array = [];
+          our_Array.push(respons);
+
+          console.log(respons);
+          //  console.log(respons);
+          const newPost = {
+            id: 101,
+            userId: 5,
+            title: "New Post Title include",
+          };
+          // const User = {
+          //   id: 102,
+          //   userId: 6,
+          //   title: "second post",
+          // };
+
+          respons.push(newPost);
+          // newPost.push(User);
+          console.log("user", newPost);
+
+          let tbody = document.getElementById("tbody");
+
+          respons.forEach((element) => {
+            // console.log('elements',element);
+            let result = "";
+            result += `
+        <tr>
+                  <td>${element.id}</td>
+                  <td>${element.userId} </dh>
+                  <td>${element.title}</td>
+       </tr>
+       `;
+            //   console.log(tbody);
+            tbody.innerHTML += result;
+          });
+        };
+
+        //   put start
+
+        //   const url3 = "https://jsonplaceholder.typicode.com/posts/3";
+        //   var data = {
+        //     userId: 1,
+        //     name: "atul",
+        //     title: "quidem molestiae enim",
+        //   };
+
+        //   var json = JSON.stringify(data);
+
+        //   xhr.open("PUT", url3, true);
+        //   xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+        //   xhr.onload = function () {
+        //     var users = JSON.parse(xhr.responseText);
+        //     console.log(users);
+        //     if (xhr.readyState == 4 && xhr.status == "200") {
+        //       let result = "";
+        //       result += `
+        //            <tr>
+        //                      <td>${users.name}</td>
+        //                       <td>${users.userId} </dh>
+        //                      <td>${users.title}</td>
+        //          </tr>
+        //            `;
+        //       console.log(tbody);
+        //       tbody.innerHTML += result;
+        //     } else {
+        //       console.error(users);
+        //     }
+        //   };
+        //   xhr.send(json);
+
+        // put ending
+
+        //POST START
+
+      //   xhr.open("POST", url);
+      //   xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+      //   var body = JSON.stringify({
+      //     userId: 1,
+      //     title: "Fix my bugs",
+      //     completed: false,
+      //   });
+      //   xhr.send(body);
+      //   xhr.onload = () => {
+      //     if (xhr.readyState == 4 && xhr.status == 201) {
+      //       console.log(JSON.parse(xhr.responseText));
+      //     } else {
+      //       console.log(`Error: ${xhr.status}`);
+      //     }
+      //   };
+
+        //     pOST ending
+
+            //delete query start
+
+          xhr.open("DELETE", 'https://jsonplaceholder.typicode.com/posts/2', true);
+          xhr.onload = function () {
+              var users = JSON.parse(xhr.responseText);
+              if (xhr.readyState == 4 && xhr.status == "200") {
+                  console.table(users);
+              } else {
+                  console.error(users);
+              }
+          }
+          xhr.send(null);
+
+          //  delete query end
+    </script>
+  </body>
+</html>
